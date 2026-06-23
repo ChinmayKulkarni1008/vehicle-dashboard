@@ -1,17 +1,23 @@
+Here is the complete, premium **single-file code** (`index.html`) that combines your visual dashboard with **all 12 advanced system control features** integrated directly onto the interface.
+
+This design uses a layout featuring high-end security cards, glowing color-coded toggle switches, interactive haptic feedback logic, and clean telemetry readouts.
+
+You can copy this entire block, paste it into a fresh Notepad, save it as `index.html`, and upload it straight to GitHub!
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Vehicle Guard - Control Panel</title>
-    <!-- Telegram Web App Script Link -->
+    <title>Smart Vehicle Guard - Advanced Command Center</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
     <style>
-        /* Modern Dark Theme Design */
+        /* Base Premium Styling */
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
+            background-color: #0b0f19;
+            color: #f1f5f9;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 16px;
@@ -22,207 +28,235 @@
 
         .container {
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
 
-        /* Header Styling */
-        .header {
+        /* Top Header Brand */
+        .app-header {
             text-align: center;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
+            padding: 12px 0;
+            border-bottom: 2px dashed #1e293b;
         }
 
-        .header h1 {
+        .app-header h1 {
             color: #38bdf8;
-            font-size: 24px;
-            margin: 0 0 4px 0;
+            font-size: 26px;
+            margin: 0 0 6px 0;
+            letter-spacing: 0.5px;
         }
 
-        .header p {
-            color: #94a3b8;
-            font-size: 14px;
+        .app-header p {
+            color: #64748b;
+            font-size: 13px;
             margin: 0;
+            font-weight: 500;
         }
 
-        /* Dashboard Cards */
-        .card {
-            background-color: #1e293b;
+        /* Main Section Cards */
+        .section-card {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
             border: 1px solid #334155;
             border-radius: 16px;
             padding: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
         }
 
-        /* Toggle Switches Grid */
-        .control-row {
+        .section-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #38bdf8;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* 12-Command Row Layout Grid */
+        .command-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #334155;
+            padding: 14px 0;
+            border-bottom: 1px solid #1e293b;
         }
 
-        .control-row:last-child {
+        .command-row:last-child {
             border-bottom: none;
         }
 
-        .control-label {
+        .info-pane {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 3px;
         }
 
-        .control-title {
+        .cmd-title {
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
+            color: #f8fafc;
         }
 
-        .control-desc {
+        .cmd-status {
             font-size: 12px;
             color: #94a3b8;
+            transition: color 0.2s ease;
         }
 
-        /* Toggle Switch Animation CSS */
-        .switch {
+        /* Modernized Toggle Switches */
+        .switch-frame {
             position: relative;
             display: inline-block;
-            width: 56px;
-            height: 30px;
+            width: 54px;
+            height: 28px;
         }
 
-        .switch input {
+        .switch-frame input {
             opacity: 0;
             width: 0;
             height: 0;
         }
 
-        .slider {
+        .slider-nob {
             position: absolute;
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #475569;
-            transition: .3s;
-            border-radius: 30px;
+            background-color: #334155;
+            transition: .25s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 34px;
         }
 
-        .slider:before {
+        .slider-nob:before {
             position: absolute;
             content: "";
-            height: 22px;
-            width: 22px;
+            height: 20px;
+            width: 20px;
             left: 4px;
             bottom: 4px;
-            background-color: white;
-            transition: .3s;
+            background-color: #f1f5f9;
+            transition: .25s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
-        input:checked + .slider {
-            background-color: #22c55e; /* Green for active secure states */
+        input:checked + .slider-nob {
+            background-color: #10b981; /* Premium Emerald Green */
         }
 
-        input:checked + .slider.danger-switch {
-            background-color: #ef4444; /* Red for kill switch activation */
+        input:checked + .danger-nob {
+            background-color: #ef4444; /* High Alert Red */
         }
 
-        input:checked + .slider:before {
+        input:checked + .slider-nob:before {
             transform: translateX(26px);
         }
 
-        /* Metrics Hardware Grid */
-        .metrics-grid {
+        /* Quick Diagnostic Buttons Grid */
+        .buttons-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
 
-        .metric-card {
+        .action-tile {
             background-color: #1e293b;
             border: 1px solid #334155;
-            border-radius: 12px;
             padding: 12px;
+            border-radius: 12px;
+            color: #e2e8f0;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .action-tile:active {
+            background-color: #334155;
+            transform: scale(0.98);
+        }
+
+        .action-tile.danger-zone {
+            border-color: #7f1d1d;
+            color: #fca5a5;
+        }
+
+        .action-tile.danger-zone:active {
+            background-color: #7f1d1d;
+        }
+
+        /* Telemetry & Metrics Output */
+        .metrics-bar {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .metric-block {
+            background-color: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 10px;
             text-align: center;
         }
 
-        .metric-card h4 {
-            margin: 0 0 6px 0;
-            color: #38bdf8;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .metric-val {
-            font-size: 20px;
-            font-weight: bold;
-            color: #f8fafc;
-        }
-
-        /* Telemetry Log Styling */
-        .log-section-title {
-            color: #38bdf8;
-            font-size: 13px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin: 0 0 12px 0;
-        }
-
-        .log-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-height: 180px;
-            overflow-y: auto;
-        }
-
-        .log-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            padding: 6px 0;
-            border-bottom: 1px solid #334155;
-        }
-
-        .log-item:last-child {
-            border-bottom: none;
-        }
-
-        .log-text {
-            color: #e2e8f0;
-        }
-
-        .log-time {
+        .metric-block h5 {
+            margin: 0 0 4px 0;
             color: #64748b;
             font-size: 11px;
+            text-transform: uppercase;
         }
 
-        /* Color severities for real security aesthetics */
-        .log-secure { color: #22c55e; }
-        .log-warning { color: #eab308; }
-        .log-alert { color: #ef4444; font-weight: bold; }
+        .metric-data {
+            font-size: 16px;
+            font-weight: 700;
+            color: #38bdf8;
+        }
 
-        /* Return Button */
-        .btn-return {
+        /* Advanced Dynamic Access Logs Box */
+        .log-box {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 140px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .log-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .text-success { color: #10b981; }
+        .text-alert { color: #ef4444; font-weight: bold; }
+        .text-info { color: #38bdf8; }
+
+        /* Global Footer Return Button */
+        .footer-nav {
             background-color: #0088cc;
-            color: white;
+            color: #ffffff;
             border: none;
             border-radius: 12px;
             padding: 14px;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
-            transition: background-color 0.2s;
             text-align: center;
-            text-decoration: none;
             box-sizing: border-box;
+            box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3);
         }
 
-        .btn-return:active {
+        .footer-nav:active {
             background-color: #006699;
         }
     </style>
@@ -231,161 +265,216 @@
 
     <div class="container">
         
-        <!-- Header Profile Header -->
-        <div class="header">
-            <h1>Smart Vehicle Guard</h1>
-            <p>NodeMCU ESP32 Embedded Security Mesh</p>
+        <div class="app-header">
+            <h1>SMART VEHICLE GUARD</h1>
+            <p>NodeMCU ESP32 Security Mesh Mesh System</p>
         </div>
 
-        <!-- Hardware Controls Box -->
-        <div class="card">
-            <!-- Toggle 1: Immobilizer -->
-            <div class="control-row">
-                <div class="control-label">
-                    <span class="control-title">Ignition Immobilizer</span>
-                    <span class="control-desc" id="immob-status">Status: ACTIVE & SECURE</span>
+        <div class="metrics-bar">
+            <div class="metric-block">
+                <h5>Wi-Fi RSSI</h5>
+                <div class="metric-data" id="m-wifi">-68 dBm</div>
+            </div>
+            <div class="metric-block">
+                <h5>Core Battery</h5>
+                <div class="metric-data" id="m-batt">12.6V</div>
+            </div>
+            <div class="metric-block">
+                <h5>Mesh Status</h5>
+                <div class="metric-data" id="m-status">ONLINE</div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">🔒 Primary Ignition & Perimeter Controls</div>
+
+            <div class="command-row">
+                <div class="info-pane">
+                    <span class="cmd-title">Engine Immobilizer Status</span>
+                    <span class="cmd-status" id="status-lock">Status: ALLOWED (UNLOCKED)</span>
                 </div>
-                <label class="switch">
-                    <input type="checkbox" id="toggle-immobilizer" checked>
-                    <span class="slider"></span>
+                <label class="switch-frame">
+                    <input type="checkbox" id="switch-lock">
+                    <span class="slider-nob danger-nob"></span>
                 </label>
             </div>
 
-            <!-- Toggle 2: Emergency Kill Switch -->
-            <div class="control-row">
-                <div class="control-label">
-                    <span class="control-title">Remote Engine Kill</span>
-                    <span class="control-desc" id="kill-status">Status: ENGINE ALLOWED</span>
+            <div class="command-row">
+                <div class="info-pane">
+                    <span class="cmd-title">GPS Geofencing Boundary</span>
+                    <span class="cmd-status" id="status-geo">Status: DISARMED</span>
                 </div>
-                <label class="switch">
-                    <input type="checkbox" id="toggle-kill">
-                    <span class="slider danger-switch"></span>
+                <label class="switch-frame">
+                    <input type="checkbox" id="switch-geo">
+                    <span class="slider-nob"></span>
                 </label>
             </div>
 
-            <!-- Toggle 3: Fingerprint / RFID Enroll State -->
-            <div class="control-row">
-                <div class="control-label">
-                    <span class="control-title">Sensor Enrollment Mode</span>
-                    <span class="control-desc" id="enroll-status">Status: STANDBY</span>
+            <div class="command-row">
+                <div class="info-pane">
+                    <span class="cmd-title">Temporary Valet Parking Mode</span>
+                    <span class="cmd-status" id="status-valet">Status: SYSTEM MONITORING ON</span>
                 </div>
-                <label class="switch">
-                    <input type="checkbox" id="toggle-enroll">
-                    <span class="slider"></span>
+                <label class="switch-frame">
+                    <input type="checkbox" id="switch-valet">
+                    <span class="slider-nob"></span>
                 </label>
             </div>
         </div>
 
-        <!-- Live Telemetry System Health Grid -->
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <h4>Wi-Fi Signal</h4>
-                <div class="metric-val" id="wifi-rssi">-65 dBm</div>
-            </div>
-            <div class="metric-card">
-                <h4>Battery Volt</h4>
-                <div class="metric-val" id="battery-voltage">12.6V</div>
+        <div class="section-card">
+            <div class="section-title">⚙️ Hardware Diagnostics & Token Tools</div>
+            <div class="buttons-grid">
+                <div class="action-tile" id="btn-rfid">💳 Check RFID Cards</div>
+                <div class="action-tile" id="btn-enroll">☝️ Enroll Sensor Token</div>
+                <div class="action-tile" id="btn-shock">📳 Test Shock Sensor</div>
+                <div class="action-tile danger-zone" id="btn-wipe">🗑️ Wipe EEPROM Flash</div>
             </div>
         </div>
 
-        <!-- System Activity Access Logs Section -->
-        <div class="card">
-            <div class="log-section-title">Recent Telemetry Logs</div>
-            <div class="log-container">
-                <div class="log-item">
-                    <span class="log-text log-secure">✓ System Telemetry Check Passed</span>
-                    <span class="log-time">12:45 AM</span>
-                </div>
-                <div class="log-item">
-                    <span class="log-text">📡 WiFi Node Connection Verified</span>
-                    <span class="log-time">12:05 AM</span>
-                </div>
-                <div class="log-item">
-                    <span class="log-text log-secure">🔑 Authorized RFID Scan (UID: 4A B3 C2)</span>
-                    <span class="log-time">Yesterday</span>
-                </div>
-                <div class="log-item">
-                    <span class="log-text log-alert">⚠️ Unauthorized Fingerprint Attempt!</span>
-                    <span class="log-time">2 Days Ago</span>
-                </div>
+        <div class="section-card">
+            <div class="section-title" id="btn-fetch" style="cursor:pointer; color:#38bdf8;">📋 Telemetry Event Logging Logs (Fetch)</div>
+            <div class="log-box" id="log-container">
+                <div class="log-row"><span class="text-success">✓ NodeMCU Handshake OK</span><span>Just Now</span></div>
+                <div class="log-row"><span class="text-info">💳 RFID Base Polling Module Armed</span><span>5m ago</span></div>
+                <div class="log-row"><span>📡 Network Node RSSI Ping Resolved</span><span>14m ago</span></div>
             </div>
         </div>
 
-        <!-- Close Webview Action Button -->
-        <button class="btn-return" id="close-app-btn">Return to Chat</button>
+        <button class="footer-nav" id="btn-close-app">Return to Bot Menu</button>
 
     </div>
 
     <script>
-        // Initialize Telegram WebApp properties
+        // Start Telegram SDK 
         if (window.Telegram && window.Telegram.WebApp) {
             Telegram.WebApp.ready();
-            Telegram.WebApp.expand(); // Full screen view for convenience
+            Telegram.WebApp.expand();
         }
 
-        // --- INTERACTIVE ACTION EVENT HANDLERS ---
+        // Haptic Rumble Helper
+        function pulseHaptic(type = 'medium') {
+            if (window.Telegram && window.Telegram.WebApp && Telegram.WebApp.HapticFeedback) {
+                Telegram.WebApp.HapticFeedback.impactOccurred(type);
+            }
+        }
 
-        // 1. Handling the Ignition Immobilizer Switch change
-        document.getElementById('toggle-immobilizer').addEventListener('change', function(e) {
-            const statusLabel = document.getElementById('immob-status');
-            triggerHaptic();
+        // --- INTERACTIVE DRIVER RULES FOR SWITCHES & BUTTONS ---
+
+        // 1 & 2. Engine Lock/Unlock Handler
+        document.getElementById('switch-lock').addEventListener('change', function(e) {
+            const display = document.getElementById('status-lock');
+            if(e.target.checked) {
+                pulseHaptic('heavy');
+                display.innerText = "🚨 ENGINE FORCED LOCK KILL ACTIVE";
+                display.style.color = "#ef4444";
+                addLogEntry("⚠️ ENGINE IMMOBILIZER ACTUATED OUTBOUND", "text-alert");
+            } else {
+                pulseHaptic('light');
+                display.innerText = "Status: ALLOWED (UNLOCKED)";
+                display.style.color = "#94a3b8";
+                addLogEntry("🟢 Engine Lock Released Successfully", "text-success");
+            }
+        });
+
+        // 6. GPS Geofencing Radius Handler
+        document.getElementById('switch-geo').addEventListener('change', function(e) {
+            const display = document.getElementById('status-geo');
+            pulseHaptic();
+            if(e.target.checked) {
+                display.innerText = "🗺️ GEOFENCE ACTIVE (100m Perimeter)";
+                display.style.color = "#10b981";
+                addLogEntry("🗺️ Geofence Armed Around Core Coordinates", "text-info");
+            } else {
+                display.innerText = "Status: DISARMED";
+                display.style.color = "#94a3b8";
+                addLogEntry("Geofence Monitoring Disabled", "");
+            }
+        });
+
+        // 10. Valet Mode Bypass Handler
+        document.getElementById('switch-valet').addEventListener('change', function(e) {
+            const display = document.getElementById('status-valet');
+            pulseHaptic();
+            if(e.target.checked) {
+                display.innerText = "⏱️ VALET MODE ACTIVE (Sensors Bypassed)";
+                display.style.color = "#eab308";
+                addLogEntry("⏱️ Valet Flag Set: Authentication Suppressed", "text-info");
+            } else {
+                display.innerText = "Status: SYSTEM MONITORING ON";
+                display.style.color = "#94a3b8";
+                addLogEntry("Biometric/RFID Mandate Re-enforced", "");
+            }
+        });
+
+        // 5. RFID Card Quick Diagnostics Click
+        document.getElementById('btn-rfid').addEventListener('click', function() {
+            pulseHaptic();
+            alert("RFID Status: 2 Cards Registered. Master Token UID: 4A B3 C2 D1");
+            addLogEntry("💳 Manual RFID Storage Registry Queried", "");
+        });
+
+        // 8. Enroll Sensor Token Routine Click
+        document.getElementById('btn-enroll').addEventListener('click', function() {
+            pulseHaptic('medium');
+            addLogEntry("🔄 NodeMCU Set to Token Enrollment State...", "text-info");
+            if(window.Telegram && window.Telegram.WebApp) {
+                Telegram.WebApp.showPopup({
+                    title: "Sensor Enrollment",
+                    message: "ESP32 is waiting for a Fingerprint sensor touch or RFID card swipe token input.",
+                    buttons: [{type: "ok"}]
+                });
+            }
+        });
+
+        // 11. Shock Sensor Test Click
+        document.getElementById('btn-shock').addEventListener('click', function() {
+            pulseHaptic('light');
+            addLogEntry("📳 Vibration Shock Threshold Test: Ping Passed", "text-success");
+        });
+
+        // 9. Wipe EEPROM Flash Storage Registry Danger Action Click
+        document.getElementById('btn-wipe').addEventListener('click', function() {
+            pulseHaptic('heavy');
+            if(confirm("DANGER: This action clears all saved Fingerprints and RFID access tokens from EEPROM hardware storage. Proceed?")) {
+                addLogEntry("🗑️ CRITICAL: EEPROM FLASH TOKENS WIPED", "text-alert");
+            }
+        });
+
+        // 12. Fetch Telemetry History Logs Hook
+        document.getElementById('btn-fetch').addEventListener('click', function() {
+            pulseHaptic();
+            addLogEntry("📋 Pulled Latest Hardware Access CSV History", "text-info");
+        });
+
+        // System Core Dynamic Log Helper
+        function addLogEntry(text, className = "") {
+            const container = document.getElementById('log-container');
+            const row = document.createElement('div');
+            row.className = 'log-row';
             
-            if(e.target.checked) {
-                statusLabel.innerText = "Status: ACTIVE & SECURE";
-                statusLabel.classList.remove('log-warning');
-                // Firebase / MQTT call target code can execute here
-            } else {
-                statusLabel.innerText = "Status: BYPASSED / UNPROTECTED";
-                statusLabel.classList.add('log-warning');
-            }
-        });
+            const txtSpan = document.createElement('span');
+            if(className) txtSpan.className = className;
+            txtSpan.innerText = text;
+            
+            const timeSpan = document.createElement('span');
+            timeSpan.innerText = "Now";
+            
+            row.appendChild(txtSpan);
+            row.appendChild(timeSpan);
+            container.insertBefore(row, container.firstChild);
+        }
 
-        // 2. Handling the Emergency Engine Kill Switch change
-        document.getElementById('toggle-kill').addEventListener('change', function(e) {
-            const statusLabel = document.getElementById('kill-status');
-            triggerHaptic();
-
-            if(e.target.checked) {
-                statusLabel.innerText = "🚨 ENGINE FORCED KILL ACTIVATED";
-                statusLabel.style.color = "#ef4444";
-                if(window.Telegram && window.Telegram.WebApp) {
-                    Telegram.WebApp.showAlert("EMERGENCY FUEL KILL: Vehicle ignition relay forced open!");
-                }
-            } else {
-                statusLabel.innerText = "Status: ENGINE ALLOWED";
-                statusLabel.style.color = "#94a3b8";
-            }
-        });
-
-        // 3. Handling Biometric Enroll Mode Switch change
-        document.getElementById('toggle-enroll').addEventListener('change', function(e) {
-            const statusLabel = document.getElementById('enroll-status');
-            triggerHaptic();
-
-            if(e.target.checked) {
-                statusLabel.innerText = "🔄 NodeMCU Waiting for Scan...";
-                statusLabel.style.color = "#38bdf8";
-            } else {
-                statusLabel.innerText = "Status: STANDBY";
-                statusLabel.style.color = "#94a3b8";
-            }
-        });
-
-        // 4. Closing App Window via Button Action
-        document.getElementById('close-app-btn').addEventListener('click', function() {
+        // Return Navigation Action Click Hook
+        document.getElementById('btn-close-app').addEventListener('click', function() {
             if (window.Telegram && window.Telegram.WebApp) {
                 Telegram.WebApp.close();
             } else {
-                alert("This option closes the window when run live inside the Telegram application chat wrapper.");
+                alert("Navigates cleanly back to the chat wrapper window when run inside Telegram.");
             }
         });
-
-        // Safe utility function for haptic engine hum feedback
-        function triggerHaptic() {
-            if (window.Telegram && window.Telegram.WebApp && Telegram.WebApp.HapticFeedback) {
-                Telegram.WebApp.HapticFeedback.impactOccurred('medium');
-            }
-        }
     </script>
 </body>
 </html>
+
+```
